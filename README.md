@@ -8,6 +8,15 @@
 
 Most people manage their career with a fragmented mess — a job board here, a resume tool there, LinkedIn for networking, spreadsheets for tracking applications. Nothing talks to anything else. CareerPilot AI, a product under Unlock AI, is my answer to what a single, coherent operating system for your career journey could look like instead.
 
+## Working screens
+
+Two of the ten screens are here as real, functioning HTML/CSS — not screenshots, not descriptions. Download and open in a browser, or view the source directly:
+
+- **[Dashboard](screens/dashboard.html)** — the Career Health gauge, today's priority queue, weekly stats
+- **[Job Discovery](screens/job-discovery.html)** — ranked matches with fit scoring
+
+The remaining eight screens (Career Health Check, Resume Studio, Auto Apply, LinkedIn Outreach AI, Interview Prep, Concierge, Application Tracker) exist in the original interactive prototype but aren't rebuilt here.
+
 ## The screens
 
 Dashboard, Career Health Check, Job Discovery, Resume Studio, Auto Apply, LinkedIn Outreach AI, Interview Prep, Concierge, Application Tracker — nine functional screens plus the dashboard, each one a real decision point a job seeker actually faces.
