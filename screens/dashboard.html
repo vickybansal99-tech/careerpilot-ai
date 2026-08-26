@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerPilot AI — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAF8F3;
+    --ink: #1C2333;
+    --ink-soft: #4A5164;
+    --line: #E4E0D6;
+    --gold: #A38652;
+    --gold-soft: #F1E9D8;
+    --green: #3D5A45;
+    --green-soft: #E7EEE8;
+    --rust: #9B4226;
+    --rust-soft: #F5E6DF;
+    --card: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    display: flex;
+    min-height: 100vh;
+  }
+  aside {
+    width: 220px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 32px 20px;
+    flex-shrink: 0;
+  }
+  .logo {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 20px;
+    margin-bottom: 40px;
+    letter-spacing: 0.02em;
+  }
+  nav a {
+    display: block;
+    color: #B8BCC8;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 2px;
+  }
+  nav a.active {
+    background: rgba(163,134,82,0.18);
+    color: var(--gold);
+    font-weight: 500;
+  }
+  main {
+    flex: 1;
+    padding: 40px 48px;
+    max-width: 1080px;
+  }
+  header.page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 36px;
+  }
+  h1 {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 30px;
+  }
+  .subtitle {
+    color: var(--ink-soft);
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  .persona-tag {
+    font-size: 12px;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 6px 14px;
+    background: var(--card);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 28px;
+  }
+  .gauge-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .gauge-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  svg.gauge { width: 160px; height: 160px; }
+  .gauge-score {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 15px;
+    fill: var(--ink);
+  }
+  .gauge-verdict {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--green);
+    font-weight: 500;
+  }
+  .gauge-note {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .right-col { display: flex; flex-direction: column; gap: 20px; }
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .stat-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 24px;
+    font-weight: 500;
+  }
+  .stat-label { font-size: 12px; color: var(--ink-soft); margin-top: 4px; }
+  .up { color: var(--green); }
+  .flat { color: var(--gold); }
+
+  .list-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+  .list-card h2 {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 17px;
+    margin-bottom: 4px;
+  }
+  .list-card .sub { font-size: 12px; color: var(--ink-soft); margin-bottom: 16px; }
+  .task {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+    font-size: 13.5px;
+  }
+  .task:first-of-type { border-top: none; }
+  .pill {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .pill.new { background: var(--gold-soft); color: var(--gold); }
+  .pill.due { background: var(--rust-soft); color: var(--rust); }
+  .pill.ok { background: var(--green-soft); color: var(--green); }
+  .task-title { flex: 1; }
+  .task-meta { color: var(--ink-soft); font-size: 12px; }
+</style>
+</head>
+<body>
+
+<aside>
+  <div class="logo">CareerPilot AI</div>
+  <nav>
+    <a class="active">Dashboard</a>
+    <a>Career Health Check</a>
+    <a>Job Discovery</a>
+    <a>Resume Studio</a>
+    <a>Auto Apply</a>
+    <a>LinkedIn Outreach AI</a>
+    <a>Interview Prep</a>
+    <a>Concierge</a>
+    <a>Application Tracker</a>
+  </nav>
+</aside>
+
+<main>
+  <header class="page-head">
+    <div>
+      <h1>Good morning, Vicky</h1>
+      <div class="subtitle">Here's where things stand this week</div>
+    </div>
+    <div class="persona-tag">VP Operations · Delhi NCR</div>
+  </header>
+
+  <div class="grid">
+    <div class="gauge-card">
+      <div class="gauge-label">Career Health</div>
+      <svg class="gauge" viewBox="0 0 160 160">
+        <circle cx="80" cy="80" r="66" fill="none" stroke="#E4E0D6" stroke-width="12"/>
+        <circle cx="80" cy="80" r="66" fill="none" stroke="#3D5A45" stroke-width="12"
+          stroke-dasharray="414.7" stroke-dashoffset="87" stroke-linecap="round"
+          transform="rotate(-90 80 80)"/>
+        <text x="80" y="76" text-anchor="middle" class="gauge-score" font-size="28" font-weight="600">79</text>
+        <text x="80" y="96" text-anchor="middle" class="gauge-score" font-size="11" fill="#4A5164">/ 100</text>
+      </svg>
+      <div class="gauge-verdict">Strong — Actively Marketable</div>
+      <div class="gauge-note">Market visibility and resume alignment are up this month. Interview readiness is the one area to work on.</div>
+    </div>
+
+    <div class="right-col">
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num up">14</div>
+          <div class="stat-label">New matches this week</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num flat">6</div>
+          <div class="stat-label">Applications in progress</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num up">3</div>
+          <div class="stat-label">Recruiter replies</div>
+        </div>
+      </div>
+
+      <div class="list-card">
+        <h2>Today's queue</h2>
+        <div class="sub">Concierge-prioritised, highest impact first</div>
+        <div class="task">
+          <span class="pill due">Due today</span>
+          <span class="task-title">Prep call notes — Director, RevOps @ Mastercard</span>
+          <span class="task-meta">Interview Prep</span>
+        </div>
+        <div class="task">
+          <span class="pill new">New match</span>
+          <span class="task-title">VP Operations, GCC — Series C fintech</span>
+          <span class="task-meta">Job Discovery</span>
+        </div>
+        <div class="task">
+          <span class="pill ok">Ready</span>
+          <span class="task-title">Tailored resume for Sales Enablement roles</span>
+          <span class="task-meta">Resume Studio</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

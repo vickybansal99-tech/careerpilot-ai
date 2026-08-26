@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerPilot AI — Job Discovery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAF8F3;
+    --ink: #1C2333;
+    --ink-soft: #4A5164;
+    --line: #E4E0D6;
+    --gold: #A38652;
+    --gold-soft: #F1E9D8;
+    --green: #3D5A45;
+    --green-soft: #E7EEE8;
+    --rust: #9B4226;
+    --card: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    display: flex;
+    min-height: 100vh;
+  }
+  aside {
+    width: 220px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 32px 20px;
+    flex-shrink: 0;
+  }
+  .logo {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 20px;
+    margin-bottom: 40px;
+  }
+  nav a {
+    display: block;
+    color: #B8BCC8;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 2px;
+  }
+  nav a.active {
+    background: rgba(163,134,82,0.18);
+    color: var(--gold);
+    font-weight: 500;
+  }
+  main { flex: 1; padding: 40px 48px; max-width: 1080px; }
+  header.page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+  h1 { font-family: 'Newsreader', serif; font-weight: 500; font-size: 30px; }
+  .subtitle { color: var(--ink-soft); font-size: 14px; margin-top: 4px; margin-bottom: 28px; }
+  .filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .filter-pill {
+    font-size: 12.5px;
+    padding: 7px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--ink-soft);
+  }
+  .filter-pill.active {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .job-list { display: flex; flex-direction: column; gap: 14px; }
+  .job-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+  }
+  .job-main { flex: 1; }
+  .job-title {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 3px;
+  }
+  .job-company { font-size: 13px; color: var(--ink-soft); margin-bottom: 12px; }
+  .job-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--green-soft);
+    color: var(--green);
+    font-weight: 500;
+  }
+  .job-match { text-align: center; width: 80px; }
+  .match-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--green);
+  }
+  .match-label { font-size: 10.5px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.04em; }
+  .job-match.mid .match-num { color: var(--gold); }
+  .job-actions { display: flex; flex-direction: column; gap: 8px; width: 130px; }
+  .btn {
+    font-size: 12.5px;
+    padding: 9px 0;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .btn.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+</style>
+</head>
+<body>
+
+<aside>
+  <div class="logo">CareerPilot AI</div>
+  <nav>
+    <a>Dashboard</a>
+    <a>Career Health Check</a>
+    <a class="active">Job Discovery</a>
+    <a>Resume Studio</a>
+    <a>Auto Apply</a>
+    <a>LinkedIn Outreach AI</a>
+    <a>Interview Prep</a>
+    <a>Concierge</a>
+    <a>Application Tracker</a>
+  </nav>
+</aside>
+
+<main>
+  <header class="page-head">
+    <div>
+      <h1>Job Discovery</h1>
+    </div>
+  </header>
+  <div class="subtitle">14 new matches this week, ranked by fit to your profile</div>
+
+  <div class="filters">
+    <div class="filter-pill active">All matches</div>
+    <div class="filter-pill">VP / Director level</div>
+    <div class="filter-pill">Revenue Ops</div>
+    <div class="filter-pill">Trust & Safety</div>
+    <div class="filter-pill">Remote-friendly</div>
+  </div>
+
+  <div class="job-list">
+    <div class="job-card">
+      <div class="job-main">
+        <div class="job-title">Director, Revenue Operations — Strategy & Transformation</div>
+        <div class="job-company">Mastercard · Gurugram, India</div>
+        <div class="job-tags">
+          <span class="tag">Revenue Ops match</span>
+          <span class="tag">GCC background valued</span>
+          <span class="tag">P&L scope aligned</span>
+        </div>
+      </div>
+      <div class="job-match">
+        <div class="match-num">94</div>
+        <div class="match-label">Fit score</div>
+      </div>
+      <div class="job-actions">
+        <div class="btn primary">Tailor & apply</div>
+        <div class="btn">View details</div>
+      </div>
+    </div>
+
+    <div class="job-card">
+      <div class="job-main">
+        <div class="job-title">VP Operations, GCC</div>
+        <div class="job-company">Series C Fintech · Bengaluru, India</div>
+        <div class="job-tags">
+          <span class="tag">GCC build experience</span>
+          <span class="tag">AI transformation valued</span>
+        </div>
+      </div>
+      <div class="job-match">
+        <div class="match-num">88</div>
+        <div class="match-label">Fit score</div>
+      </div>
+      <div class="job-actions">
+        <div class="btn primary">Tailor & apply</div>
+        <div class="btn">View details</div>
+      </div>
+    </div>
+
+    <div class="job-card">
+      <div class="job-main">
+        <div class="job-title">Head of Trust & Safety, APAC</div>
+        <div class="job-company">Global Marketplace · Remote (India)</div>
+        <div class="job-tags">
+          <span class="tag">T&S domain match</span>
+          <span class="tag">AI moderation systems valued</span>
+        </div>
+      </div>
+      <div class="job-match mid">
+        <div class="match-num">76</div>
+        <div class="match-label">Fit score</div>
+      </div>
+      <div class="job-actions">
+        <div class="btn primary">Tailor & apply</div>
+        <div class="btn">View details</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>
